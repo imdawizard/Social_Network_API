@@ -4,7 +4,7 @@ const User = require('../../models/user');
 const Thought = require('../../models/thought');
 
 // GET all users
-router.get('/users', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -14,7 +14,7 @@ router.get('/users', async (req, res) => {
 });
 
 // GET a single user by its _id and populate thought and friend data
-router.get('/users/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const userId = req.params.id;
     const user = await User.findById(userId)
@@ -30,7 +30,7 @@ router.get('/users/:id', async (req, res) => {
 });
 
 // POST a new user
-router.post('/users', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const newUser = await User.create(req.body);
     res.status(201).json(newUser);
@@ -40,7 +40,7 @@ router.post('/users', async (req, res) => {
 });
 
 // PUT to update a user by its _id
-router.put('/users/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const userId = req.params.id;
     const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
@@ -57,7 +57,7 @@ router.put('/users/:id', async (req, res) => {
 });
 
 // DELETE to remove a user by its _id
-router.delete('/users/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const userId = req.params.id;
 

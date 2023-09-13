@@ -13,8 +13,8 @@ router.get('/thoughts', async (req, res) => {
   }
 });
 
-// GET to get a single thought by its _id
-router.get('/thoughts/:thoughtId', async (req, res) => {
+// GET  a single thought by its _id
+router.get('/:thoughtId', async (req, res) => {
   try {
     const thoughtId = req.params.thoughtId;
     const thought = await Thought.findById(thoughtId);
@@ -28,7 +28,7 @@ router.get('/thoughts/:thoughtId', async (req, res) => {
 });
 
 // POST to create a new thought
-router.post('/thoughts', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { thoughtText, username, userId } = req.body;
     
@@ -45,7 +45,7 @@ router.post('/thoughts', async (req, res) => {
 });
 
 // PUT to update a thought by its _id
-router.put('/thoughts/:thoughtId', async (req, res) => {
+router.put('/:thoughtId', async (req, res) => {
   try {
     const thoughtId = req.params.thoughtId;
     const updatedThought = await Thought.findByIdAndUpdate(thoughtId, req.body, {
@@ -62,7 +62,7 @@ router.put('/thoughts/:thoughtId', async (req, res) => {
 });
 
 // DELETE to remove a thought by its _id
-router.delete('/thoughts/:thoughtId', async (req, res) => {
+router.delete('/:thoughtId', async (req, res) => {
   try {
     const thoughtId = req.params.thoughtId;
 
@@ -82,7 +82,7 @@ router.delete('/thoughts/:thoughtId', async (req, res) => {
 });
 
 // POST to create a reaction stored in a single thought's reactions array field
-router.post('/thoughts/:thoughtId/reactions', async (req, res) => {
+router.post('/:thoughtId/reactions', async (req, res) => {
   try {
     const thoughtId = req.params.thoughtId;
     const { reactionBody, username } = req.body;
@@ -104,7 +104,7 @@ router.post('/thoughts/:thoughtId/reactions', async (req, res) => {
 });
 
 // DELETE to pull and remove a reaction by the reaction's reactionId value
-router.delete('/thoughts/:thoughtId/reactions/:reactionId', async (req, res) => {
+router.delete('/:thoughtId/reactions/:reactionId', async (req, res) => {
   try {
     const thoughtId = req.params.thoughtId;
     const reactionId = req.params.reactionId;
