@@ -19,7 +19,7 @@ router.get('/:id', async (req, res) => {
     const userId = req.params.id;
     const user = await User.findById(userId)
       .populate('thoughts') // Populate user's thoughts
-      .populate('friends'); // Populate user's friends
+      console.log(`The friendCount is ${user.friendCount}`);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }

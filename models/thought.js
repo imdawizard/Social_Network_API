@@ -19,9 +19,6 @@ const reactionSchema = new mongoose.Schema(
       get: (timestamp) => formatDate(timestamp),
     },
   },
-  {
-    _id: false, // Disable auto-generation of _id for nested documents
-  }
 );
 
 // Define the Thought Schema

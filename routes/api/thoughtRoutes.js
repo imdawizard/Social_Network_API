@@ -4,7 +4,7 @@ const Thought = require('../../models/thought');
 const User = require('../../models/user');
 
 // GET to get all thoughts
-router.get('/thoughts', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const thoughts = await Thought.find();
     res.json(thoughts);
