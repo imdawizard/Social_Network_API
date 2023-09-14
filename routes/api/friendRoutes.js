@@ -99,24 +99,16 @@ router.post('/:userId/friends/:friendId', async (req, res) => {
     console.log('userId:', userId);
     console.log('friendId:', friendId);
     
-    // Verify user existence
-    const user = await User.findById(userId).populate('friends');
 
+    // Verify user existence, !user print user not found
+    const user = await User.findById(userId)
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
+    //push new friend id to friends array
+    const updatedUser = await User.findByIdAndUpdate(userId, {$push: {friends: friendId}});
 
-
-    user.friendCount++;
-    await user.save();
-    // Increment the friend count
-    // const updatedUser = await User.findByIdAndUpdate(
-    //   userId,
-    //   { $inc: { friendCount: 1 } }, // Increment friendCount by 1
-    //   { new: true }
-    // );
-
-    res.json({ message: 'Friend added successfully', user });
+    res.json({ message: 'Friend added successfully', updatedUser, friendCount: user.friendCount });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
