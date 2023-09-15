@@ -7,7 +7,11 @@ const User = require('../../models/user');
 router.get('/', async (req, res) => {
   try {
     const thoughts = await Thought.find();
-    res.json(thoughts);
+    const thoughtsRC = thoughts.map((thoughts) => ({
+      ...thoughts.toJSON(),
+      reactionCount: thoughts.reactionCount,
+    }));
+    res.json(thoughtsRC);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -19,9 +23,9 @@ router.get('/:thoughtId', async (req, res) => {
     const thoughtId = req.params.thoughtId;
     const thought = await Thought.findById(thoughtId);
     if (!thought) {
-      return res.status(404).json({ message: 'Thought not found' });
+      return res.status(404).json('Thought not found');
     }
-    res.json(thought);
+    res.json({message: thought, reactionCount: thought.reactionCount});
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

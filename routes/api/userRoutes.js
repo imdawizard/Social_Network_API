@@ -7,7 +7,11 @@ const Thought = require('../../models/thought');
 router.get('/', async (req, res) => {
   try {
     const users = await User.find();
-    res.json(users);
+    const usersFC = users.map((user) => ({
+      ...user.toJSON(),
+      friendCount: user.friendCount,
+    }));
+    res.json(usersFC);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -23,7 +27,7 @@ router.get('/:id', async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.json(user);
+    res.json({message: user, friendCount: user.friendCount});
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -33,7 +37,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const newUser = await User.create(req.body);
-    res.status(201).json(newUser);
+    res.status(201).json({message: newUser, friendCount: newUser.friendCount});
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -50,7 +54,7 @@ router.put('/:id', async (req, res) => {
     if (!updatedUser) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.json(updatedUser);
+    res.json({message: updatedUser, friendCount: updatedUser.friendCount});
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -68,21 +72,13 @@ router.delete('/:id', async (req, res) => {
     if (!deletedUser) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.json({ message: 'User deleted successfully' });
+    res.json({ message: 'User and associated deleted successfully' });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
 
 module.exports = router;
-// In this code:
-
-// The GET route at /api/users fetches all users.
-// The GET route at /api/users/:id fetches a single user by their _id and populates their thoughts and friends data.
-// The POST route at /api/users creates a new user.
-// The PUT route at /api/users/:id updates a user by their _id.
-// The DELETE route at /api/users/:id removes a user by their _id and, as a bonus, also deletes their associated thoughts.
-
 
 
 
