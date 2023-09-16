@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
     // Push the created thought's _id to the associated user's thoughts array field
     await User.findByIdAndUpdate(userId, { $push: { thoughts: newThought._id } });
 
-    res.status(201).json(newThought);
+    res.status(201).json({message: newThought, reactionCount: newThought.reactionCount});
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -59,7 +59,7 @@ router.put('/:thoughtId', async (req, res) => {
     if (!updatedThought) {
       return res.status(404).json({ message: 'Thought not found' });
     }
-    res.json(updatedThought);
+    res.json({messagee: updatedThought, reactionCount: updatedThought.reactionCount});
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -101,7 +101,7 @@ router.post('/:thoughtId/reactions', async (req, res) => {
       return res.status(404).json({ message: 'Thought not found' });
     }
 
-    res.status(201).json(updatedThought);
+    res.status(201).json({message: updatedThought, reactionCount: updatedThought.reactionCount});
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -123,7 +123,7 @@ router.delete('/:thoughtId/reactions/:reactionId', async (req, res) => {
       return res.status(404).json({ message: 'Thought not found' });
     }
 
-    res.json(updatedThought);
+    res.json({message: 'Reaction deleted successfully'});
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

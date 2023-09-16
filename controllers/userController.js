@@ -42,17 +42,6 @@ module.exports = {
     }
   },
 
-  // async addFriend(req, res) {
-  //   try {
-  //     const { userId, friendId } = req.params;
-  //     await User.findByIdAndUpdate(userId, { $addToSet: { friends: friendId }},
-  //     {new: true},
-  //   );
-  //     res.json({ message: 'Friend added successfully' });
-  //   } catch (err) {
-  //     res.status(500).json({ error: err.message });
-  //   }
-  // }
   
   async addFriend(req, res) {
     try {
