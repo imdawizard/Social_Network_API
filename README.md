@@ -19,10 +19,9 @@ For this project will need:
 - MangoDb
 - Mangoose
 - Some kind of API development testing platform such as Insomnia
-- 
 
 ## Usage
-Due to this project only having backend properties, a Insomnia, or Postman is required in order to GET, create, update, or delete users, thoughts, and reactions. Users can perform and these actions to manipulate the database to create users, add thoughts and reactions to them. Add also update them or delete them.
+Due to this project only having backend properties, using your API testing platform such as Insomnia, or Postman you can GET, create, update, or delete users, thoughts, and reactions. Users can perform and these actions to manipulate the database to create users, add thoughts and reactions to them. Add also update them or delete them.
 
 ## License
 This project does not currently have a license.
